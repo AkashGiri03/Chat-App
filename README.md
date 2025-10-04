@@ -1,0 +1,1 @@
+ChatterUp is a real-time chat application built with Node.js, Express.js, Socket.io, and MongoDB for the backend, and plain JavaScript, HTML, and CSS for the frontend. It features room-based chatting, user onboarding with profile pictures, live online user notifications, typing indicators, and persistent chat history. Perfect for collaborative and interactive communication.
