@@ -1,0 +1,16 @@
+{
+  "name": "chatterup",
+  "version": "1.0.0",
+  "description": "Real-time chat app using Node.js, Express.js, Socket.io, MongoDB",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "git": "^0.1.5",
+    "mongoose": "^7.5.0",
+    "socket.io": "^4.7.2"
+  }
+}
