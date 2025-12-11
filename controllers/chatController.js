@@ -4,8 +4,9 @@ const onlineUsers = {};
 
 export default function(io) {
   io.on('connection', (socket) => {
-    
+    console.log('Socket connected:', socket.id);
     socket.on('join', async ({ username, profilePic, room }) => {
+      console.log(`${username} joining room: ${room} (socket ${socket.id})`);
       try {
         onlineUsers[socket.id] = { username, profilePic, room };
         socket.join(room);
@@ -20,6 +21,7 @@ export default function(io) {
     });
 
     socket.on('message', async (msg) => {
+      console.log('Received message event:', msg);
       const user = onlineUsers[socket.id];
       if (!user || user.room !== msg.room) return;
       const message = new Message({
