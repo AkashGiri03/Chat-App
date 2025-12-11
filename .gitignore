@@ -1,0 +1,13 @@
+# Node modules
+node_modules/
+
+# dotenv
+.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional: local env overrides
+.env.local

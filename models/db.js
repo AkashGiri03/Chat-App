@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
 const connectDB = async () => {
+  const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/ChatterUp';
   try {
-    await mongoose.connect('mongodb://localhost:27017/ChatterUp', {
+    await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });

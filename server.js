@@ -1,5 +1,6 @@
 
 import express from 'express';
+import dotenv from 'dotenv';
 import http from 'http';
 import { Server } from 'socket.io';
 import connectDB from './models/db.js';
@@ -14,6 +15,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+// Load environment variables from .env (if present)
+dotenv.config();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
