@@ -16,18 +16,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const server = http.createServer(app);
 
-// Allowed frontend origins (add your Vercel URL and localhost for dev)
-const allowedOrigins = [
-  'https://chat-app-yb44.vercel.app',
-  'https://chat-app.vercel.app',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000'
-];
-
-// Create Socket.io server with CORS configured so browser clients can connect
+// Temporarily allow any origin for debugging (NOT for production).
+// Using `origin: true` reflects the request origin and works with credentials.
+// Revert this to a specific allowlist once testing is complete.
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: true,
     methods: ['GET', 'POST'],
     credentials: true
   }
@@ -39,8 +33,9 @@ dotenv.config();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+// Allow requests from any origin for debugging. Remove/refine before production.
 app.use(cors({
-  origin: allowedOrigins,
+  origin: true,
   methods: ['GET', 'POST'],
   credentials: true
 }));
