@@ -1,4 +1,12 @@
-const socket = io();
+// Use Render backend in production; fallback to same-origin for local development
+const RENDER_BACKEND = 'https://chat-app-7c3g.onrender.com';
+const socket = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? io()
+  : io(RENDER_BACKEND, { transports: ['websocket', 'polling'] });
+
+// Debug connection status
+socket.on('connect', () => console.log('Socket connected', socket.id));
+socket.on('connect_error', (err) => console.error('Socket connect_error', err));
 let username = '';
 let profilePicData = '';
 
