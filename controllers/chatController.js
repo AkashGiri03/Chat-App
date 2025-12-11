@@ -4,14 +4,19 @@ const onlineUsers = {};
 
 export default function(io) {
   io.on('connection', (socket) => {
+    
     socket.on('join', async ({ username, profilePic, room }) => {
-      onlineUsers[socket.id] = { username, profilePic, room };
-      socket.join(room);
-      const messages = await Message.find({ room }).sort({ timestamp: 1 }).limit(100);
-      const usersInRoom = Object.values(onlineUsers).filter(u => u.room === room);
-      io.to(room).emit('userList', usersInRoom);
-      socket.emit('chatHistory', messages);
-      io.to(room).emit('userJoined', { username, profilePic });
+      try {
+        onlineUsers[socket.id] = { username, profilePic, room };
+        socket.join(room);
+        const messages = await Message.find({ room }).sort({ timestamp: 1 }).limit(100);
+        const usersInRoom = Object.values(onlineUsers).filter(u => u.room === room);
+        io.to(room).emit('userList', usersInRoom);
+        socket.emit('chatHistory', messages);
+        io.to(room).emit('userJoined', { username, profilePic });
+      } catch (err) {
+        console.error('Error in join:', err);
+      }
     });
 
     socket.on('message', async (msg) => {

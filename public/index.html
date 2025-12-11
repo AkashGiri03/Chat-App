@@ -7,31 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Onboarding Modal -->
   <div id="onboarding" class="modal">
-    <h2>Welcome to ChatterUp!</h2>
+    <h2>👋 Welcome to ChatterUp!</h2>
+    <p class="app-description">
+      ChatterUp is a <strong>room-based chat app</strong> where you can join or create rooms 
+      to talk with friends, classmates, or colleagues.  
+      Enter your details below to get started.
+    </p>
+
+    <label for="username">👤 Your Name</label>
     <input type="text" id="username" placeholder="Enter your name" required>
+
+    <label for="profilePic">🖼️ Profile Picture (optional)</label>
     <input type="file" id="profilePic" accept="image/*">
+
+    <label for="room">🔑 Room Name</label>
     <input type="text" id="room" placeholder="Enter room name (or create new)" required>
-    <button id="joinBtn">Join Room</button>
+
+    <button id="joinBtn">🚀 Join Room</button>
   </div>
+
+  <!-- Header -->
   <header>
-    <h1 id="welcomeMsg"></h1>
-    <div id="userCount"></div>
+    <h1 id="welcomeMsg">🗨️ ChatterUp</h1>
+    <div id="userCount">Users Online: 0</div>
   </header>
+
+  <!-- Main Layout -->
   <main>
+    <!-- Sidebar -->
     <aside id="userPanel">
-      <h3>Online Users</h3>
+      <h3>👥 Online Users</h3>
       <ul id="users"></ul>
     </aside>
+
+    <!-- Chat Section -->
     <section id="chatSection">
       <div id="chatHistory"></div>
       <div id="typingIndicator"></div>
       <form id="chatForm">
-        <input type="text" id="chatInput" autocomplete="off" placeholder="Type a message...">
+        <input type="text" id="chatInput" autocomplete="off" placeholder="Type a message..." required>
         <button type="submit">Send</button>
       </form>
     </section>
   </main>
+
+  <!-- Scripts -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="app.js"></script>
 </body>

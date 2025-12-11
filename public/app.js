@@ -39,6 +39,8 @@ joinBtn.onclick = () => {
 function finishJoin() {
   socket.emit('join', { username, profilePic: profilePicData, room });
   onboarding.style.display = 'none';
+  document.querySelector('header').style.display = 'block';
+  document.querySelector('main').style.display = 'flex';
   welcomeMsg.textContent = `Welcome, ${username}! (Room: ${room})`;
 }
 
@@ -50,20 +52,29 @@ socket.on('chatHistory', (messages) => {
 socket.on('message', renderMessage);
 
 function renderMessage(msg) {
+  const isMine = username && msg.username === username;
   const div = document.createElement('div');
-  div.className = 'message';
+  div.className = 'message' + (isMine ? ' mine' : '');
+
   const img = document.createElement('img');
   img.className = 'profile-pic';
   img.src = msg.profilePic || 'https://via.placeholder.com/40';
+
   const contentDiv = document.createElement('div');
   contentDiv.className = 'message-content';
+  if (isMine) contentDiv.classList.add('mine-content');
+
   const headerDiv = document.createElement('div');
   headerDiv.className = 'message-header';
   headerDiv.textContent = `${msg.username} • ${new Date(msg.timestamp).toLocaleTimeString()}`;
+
   contentDiv.appendChild(headerDiv);
   contentDiv.appendChild(document.createTextNode(msg.content));
+
+  // For own messages, show content before profile pic (row-reverse via CSS)
   div.appendChild(img);
   div.appendChild(contentDiv);
+
   chatHistory.appendChild(div);
   chatHistory.scrollTop = chatHistory.scrollHeight;
 }
