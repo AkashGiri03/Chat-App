@@ -10,4 +10,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Optional: local env overrides
-.env.local
+
